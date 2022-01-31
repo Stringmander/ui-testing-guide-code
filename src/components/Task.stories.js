@@ -8,6 +8,7 @@ export default {
     onArchiveTask: { action: "onArchiveTask" },
     onPinTask: { action: "onPinTask" },
     onEditTitle: { action: "onEditTitle" },
+    onDeleteTask: { action: "onDeleteTask" },
   },
   parameters: {
     a11y: {
