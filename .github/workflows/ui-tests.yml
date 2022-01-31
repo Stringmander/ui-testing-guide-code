@@ -1,10 +1,10 @@
-name: 'UI Tests'
+name: "UI Tests"
 
 on: push
 
 jobs:
   # Run interaction and accessibility tests with Axe
-  interations-and-accessibility:
+  interaction-and-accessibility:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -12,20 +12,20 @@ jobs:
         run: yarn
       - name: Run test
         run: yarn test
-  # Run visual and compositon tests with Chromatic
+  # Run visual and composition tests with Chromatic
   visual-and-composition:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      with:
-        fetch-depth: 0 # Required to retrieve git history
+        with:
+          fetch-depth: 0 # Required to retrieve git history
       - name: Install dependencies
         run: yarn
       - name: Publish to Chromatic
-        uses: chromatic/chromatic@v1
+        uses: chromaui/action@v1
         with:
-          tokenL ${{ secrets.GITHUB_TOKEN }}
-          projectToken ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
   # Run user flow tests with Cypress
   user-flow:
     runs-on: ubuntu-latest
@@ -37,4 +37,3 @@ jobs:
         uses: cypress-io/github-action@v2
         with:
           start: npm start
-          
