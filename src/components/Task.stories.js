@@ -9,6 +9,13 @@ export default {
     onPinTask: { action: "onPinTask" },
     onEditTitle: { action: "onEditTitle" },
   },
+  parameters: {
+    a11y: {
+      config: {
+        rules: [{ id: "listitem", enabled: false }],
+      },
+    },
+  },
 };
 
 const Template = (args) => <Task {...args} />;
