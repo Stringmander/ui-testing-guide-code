@@ -6,6 +6,7 @@ import {
   cleanup,
   within,
   fireEvent,
+  getAllByRole,
 } from "@testing-library/react";
 import { axe, toHaveNoViolations } from "jest-axe";
 import { composeStories } from "@storybook/testing-react";
@@ -91,5 +92,23 @@ describe("InboxScreen", () => {
       target: { value: "Fix bug in textarea error state" },
     });
     expect(taskInput.value).toBe(updatedTaskName);
+  });
+
+  it("should delete a task", async () => {
+    const { queryByText, getByRole, getAllByRole } = render(<Default />);
+
+    await waitFor(() => {
+      expect(queryByText("You have no tasks")).not.toBeInTheDocument();
+    });
+
+    const getTask = () => getByRole("listitem", { name: "Export logo" });
+
+    const deleteButton = within(getTask()).getByRole("button", {
+      name: "delete",
+    });
+
+    fireEvent.click(deleteButton);
+
+    expect(getAllByRole("listitem").length).toBe(5);
   });
 });
